@@ -80,8 +80,7 @@ def balance_teams(teams, players):
     
     return new_teams
 
-
-def show_stats(x):
+def show_stats(x, new_teams):
     print("\n")
     if x == "A":
         team = new_teams[0]
@@ -89,49 +88,49 @@ def show_stats(x):
         team = new_teams[1]
     elif x == "C":
         team = new_teams[2]
-    print(f'Team: {team['name']}')
+    print(f'Team: {team["name"]}')
     print("---------------------")
-    print(f'Total Players: {len(team['players'])}')
-    print(f'Total experienced: {team['num_exp']}')
-    print(f'Total inexperienced: {team['num_nonexp']}')
-    print(f'Average height: {team['avg_height']}')
+    print(f'Total Players: {len(team["players"])}')
+    print(f'Total experienced: {team["num_exp"]}')
+    print(f'Total inexperienced: {team["num_nonexp"]}')
+    print(f'Average height: {team["avg_height"]}')
     
     player_list = []
     guardian_list = []
-    for player in team['players']:
-        player_list.append(player['name'])
-        for guardian in player['guardians']:
+    for player in team["players"]:
+        player_list.append(player["name"])
+        for guardian in player["guardians"]:
             guardian_list.append(guardian)
-    print(f'\nPlayers on team:\n{', '.join(player_list)}')
-    print(f'\nGuardians on team:\n{', '.join(guardian_list)}')
-        
-    # Unpack players, 
-    # ORGANIZE BY HEIGHT
+    print(f'\nPlayers on team:\n{", ".join(player_list)}')
+    print(f'\nGuardians on team:\n{", ".join(guardian_list)}')
     return 0
 
-new_players = clean_data_basic(PLAYERS)
-new_teams = balance_teams(TEAMS, new_players)
 
+def menu():
+    new_teams = balance_teams(TEAMS, clean_data_basic(PLAYERS))
+    
+    print("Basketball Team Stats Tool")
+    while True:
+        print("\n------- Menu -------\n\n")
+        print("A) Display Team Stats\nB) Quit\n\n")
 
-print("Basketball Team Stats Tool")
-
-while True:
-    print("\n------- Menu -------\n\n")
-    print("A) Display Team Stats\nB) Quit\n\n")
-
-    x = input("Enter an option: ")
-
-    if x == "A":
-        print("Which team's stats would you like to view?\n")
-        print("A) Panthers\nB) Bandits\nC) Warriors\n")
         x = input("Enter an option: ")
-        if x == "A" or x == "B" or x == "C":
-            show_stats(x)
-        else:
-            print("Please select A, B, or C.")
-    elif x == "B":
-        break
-    else:
-        print("Please select a valid menu option")
 
-print("\n\nThank you for using Basketball Team Stats Tool.\nHave a nice day!")
+        if x == "A":
+            print("Which team's stats would you like to view?\n")
+            print("A) Panthers\nB) Bandits\nC) Warriors\n")
+            x = input("Enter an option: ")
+            if x == "A" or x == "B" or x == "C":
+                show_stats(x, new_teams)
+            else:
+                print("Please select A, B, or C.")
+        elif x == "B":
+            break
+        else:
+            print("Please select a valid menu option")
+
+    print("\n\nThank you for using Basketball Team Stats Tool.\nHave a nice day!")
+    return 0
+
+if __name__ == "__main__":
+    menu()
