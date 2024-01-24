@@ -7,8 +7,7 @@ Project 2 - Basketball Stats Project
 """
 By: Jabr Abumaali
 Started: Nov 21, 2023
-Completed: ------------
---------------------------------
+Completed: Dec 1, 2023
 """
 from constants import TEAMS, PLAYERS
 
